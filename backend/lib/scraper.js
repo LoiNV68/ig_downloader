@@ -132,8 +132,8 @@ async function scrapeInstagram(url) {
       videos: [...videos],
     };
   } catch (error) {
-    console.error("Scrape error:", error.message);
-    throw new Error(`Failed to scrape: ${error.message}`);
+    console.error("Lỗi cào dữ liệu:", error.message);
+    throw new Error(`Không thể cào dữ liệu: ${error.message}`);
   } finally {
     if (browser) {
       await browser.close();

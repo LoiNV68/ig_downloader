@@ -24,8 +24,8 @@ app.post("/download", async (req, res) => {
   // Validate URL
   if (!url) {
     return res.status(400).json({
-      error: "URL is required",
-      message: "Please provide an Instagram URL",
+      error: "Thiếu URL",
+      message: "Vui lòng cung cấp link Instagram",
     });
   }
 
@@ -33,8 +33,8 @@ app.post("/download", async (req, res) => {
   const igPattern = /^https?:\/\/(www\.)?instagram\.com\/([\w.-]+\/)?(p|reel|reels|tv)\/[\w-]+/i;
   if (!igPattern.test(url)) {
     return res.status(400).json({
-      error: "Invalid URL",
-      message: "Please provide a valid Instagram post, reel, or TV URL",
+      error: "URL không hợp lệ",
+      message: "Vui lòng cung cấp link đúng chuẩn (bài viết, reels, hoặc TV)",
     });
   }
 
@@ -45,9 +45,9 @@ app.post("/download", async (req, res) => {
 
     if (result.images.length === 0 && result.videos.length === 0) {
       return res.status(404).json({
-        error: "No media found",
+        error: "Không tìm thấy nội dung",
         message:
-          "Could not find any media. The post may be private or the URL may be incorrect.",
+          "Không thể tìm thấy video/ảnh nào. Có thể bài viết ở chế độ riêng tư hoặc đường link sai.",
       });
     }
 
@@ -63,7 +63,7 @@ app.post("/download", async (req, res) => {
   } catch (error) {
     console.error(`[${new Date().toISOString()}] Error:`, error.message);
     return res.status(500).json({
-      error: "Scrape failed",
+      error: "Cào dữ liệu thất bại",
       message: error.message,
     });
   }
@@ -76,12 +76,12 @@ app.get("/proxy-download", async (req, res) => {
   const { url, filename } = req.query;
 
   if (!url) {
-    return res.status(400).json({ error: "URL is required" });
+    return res.status(400).json({ error: "Thiếu URL" });
   }
 
   // Only allow Instagram CDN URLs
   if (!url.includes("cdninstagram.com") && !url.includes("fbcdn.net")) {
-    return res.status(400).json({ error: "Invalid media URL" });
+    return res.status(400).json({ error: "URL media không hợp lệ" });
   }
 
   console.log(`[${new Date().toISOString()}] Proxy download: ${filename || "media"}`);
@@ -96,7 +96,7 @@ app.get("/proxy-download", async (req, res) => {
     });
 
     if (!response.ok) {
-      throw new Error(`CDN responded with ${response.status}`);
+      throw new Error(`Máy chủ Instagram phản hồi lỗi: ${response.status}`);
     }
 
     const contentType = response.headers.get("content-type") || "application/octet-stream";
@@ -121,7 +121,7 @@ app.get("/proxy-download", async (req, res) => {
   } catch (error) {
     console.error(`[${new Date().toISOString()}] Proxy error:`, error.message);
     if (!res.headersSent) {
-      res.status(500).json({ error: "Download failed", message: error.message });
+      res.status(500).json({ error: "Tải file thất bại", message: error.message });
     }
   }
 });

@@ -13,9 +13,9 @@ RUN npm install
 # Copy rest of the application
 COPY . .
 
-# Set environment variables for Puppeteer
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
+# Set environment variables
+ENV PORT=3001
+
 ENV PORT=3001
 
 EXPOSE 3001
