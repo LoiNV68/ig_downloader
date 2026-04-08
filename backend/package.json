@@ -1,0 +1,15 @@
+{
+  "name": "ig-downloader-backend",
+  "version": "1.0.0",
+  "description": "Instagram Downloader Backend - Puppeteer crawler",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "puppeteer": "^22.6.0"
+  }
+}
