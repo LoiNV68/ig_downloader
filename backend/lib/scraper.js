@@ -74,8 +74,8 @@ async function scrapeInstagram(url) {
 
     // Navigate to the Instagram post
     await page.goto(url, {
-      waitUntil: "networkidle2",
-      timeout: 30000,
+      waitUntil: "domcontentloaded",
+      timeout: 60000,
     });
 
     // Wait extra time for lazy-loaded content
