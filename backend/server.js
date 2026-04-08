@@ -34,7 +34,7 @@ app.post("/download", async (req, res) => {
   if (!igPattern.test(url)) {
     return res.status(400).json({
       error: "Invalid URL",
-      message: "Please provide a valid Instagram post, reel, or TV URgit commit -m "first commit"L",
+      message: "Please provide a valid Instagram post, reel, or TV URL",
     });
   }
 
