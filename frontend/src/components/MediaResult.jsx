@@ -76,7 +76,7 @@ export default function MediaResult({ result, loading }) {
     );
   }
 
-  const API_URL = `${window.location.protocol}//${window.location.hostname}:3001`;
+  const API_URL = import.meta.env.VITE_API_URL || `${window.location.protocol}//${window.location.hostname}:3001`;
 
   const handleDownload = async (mediaUrl, filename) => {
     try {
